@@ -75,3 +75,53 @@ AgeGroup = SWITCH(
     'public cust_detail'[customer_age] >= 60, "60+",
     "unknown"
 )
+
+### 2. **Income Group**
+Categorizes customers into income groups.
+
+```DAX
+IncomeGroup = SWITCH(
+    TRUE(),
+    'public cust_detail'[income] < 35000, "Low",
+    'public cust_detail'[income] >= 35000 && 'public cust_detail'[income] <70000, "Med",
+    'public cust_detail'[income] >= 70000, "High",
+    "unknown"
+)
+
+### 3. Week Number  
+Extracts the week number from the week start date.
+
+```dax
+week_num2 = WEEKNUM('public cc_detail'[week_start_date])
+
+### 4. Revenue Calculation
+Calculates the total revenue for a customer based on annual fees, transaction amount, and interest earned.
+
+```DAX
+Revenue = 'public cc_detail'[annual_fees] + 
+          'public cc_detail'[total_trans_amt] + 
+          'public cc_detail'[interest_earned]
+
+### 5. Current Week Revenue
+Calculates revenue for the most recent week.
+
+```dax
+Current_week_Revenue = CALCULATE(
+    SUM('public cc_detail'[Revenue]),
+    FILTER(
+        ALL('public cc_detail'),
+        'public cc_detail'[week_num2] = MAX('public cc_detail'[week_num2])
+    )
+)
+
+### 6. Previous Week Revenue
+Calculates revenue for the week preceding the current one.
+
+```dax
+Previous_week_Revenue = CALCULATE(
+    SUM('public cc_detail'[Revenue]),
+    FILTER(
+        ALL('public cc_detail'),
+        'public cc_detail'[week_num2] = MAX('public cc_detail'[week_num2]) - 1
+    )
+)
