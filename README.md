@@ -74,7 +74,7 @@ AgeGroup = SWITCH(
     'public cust_detail'[customer_age] >= 50 && 'public cust_detail'[customer_age] < 60, "50-60",
     'public cust_detail'[customer_age] >= 60, "60+",
     "unknown"
-)
+)```
 
 ### 2. **Income Group**
 Categorizes customers into income groups.
@@ -86,7 +86,7 @@ IncomeGroup = SWITCH(
     'public cust_detail'[income] >= 35000 && 'public cust_detail'[income] <70000, "Med",
     'public cust_detail'[income] >= 70000, "High",
     "unknown"
-)
+)```
 
 ### 3. Week Number  
 Extracts the week number from the week start date.
