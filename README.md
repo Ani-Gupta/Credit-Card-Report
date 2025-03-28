@@ -74,7 +74,17 @@ AgeGroup = SWITCH(
     'public cust_detail'[customer_age] >= 50 && 'public cust_detail'[customer_age] < 60, "50-60",
     'public cust_detail'[customer_age] >= 60, "60+",
     "unknown"
-)```
+)
+
+---
+
+### 2. **Explanation of the Logic**
+This formula uses the `SWITCH` function to categorize customers into age ranges based on the `customer_age` field.
+
+Each condition checks for different ranges of customer age, and assigns a specific age group to the customer.
+
+- Ages below 30 are grouped as "20-30".
+- Ages between 30 and 39 are grouped as "30-40", and so on.
 
 ### 2. **Income Group**
 Categorizes customers into income groups.
